@@ -1,0 +1,38 @@
+/* .wrapper {
+    margin: 0 auto;
+    padding-top: 3em;
+    width: 500px
+   
+  
+}
+
+body {
+    background-color: beige;
+
+}
+ 
+h1 {
+    text-align: left d;
+    padding-bottom: 1em;
+}
+
+.form-control{
+    width: 25rem;
+} */
+
+.form-container {
+    position: absolute;
+    top: 15vh;
+	background: #D3d3d3;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px 0px #000;
+}
+
+.bg {
+    background-image: url(https://www.tennis-tourtalk.com/wp-content/uploads/2019/09/Fotomontage_Steffi-Graf-Stadion.jpg) ;
+    width: 100%;
+    height: 100vh;
+    background-size: 100%;
+    opacity: 80%;
+}

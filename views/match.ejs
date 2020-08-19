@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<!-- <script src="/scripts/winBySurf.ejs"></script> -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		/>
+		<link rel="stylesheet" href="/stylesheets/match.css" />
+		<title>Match Preview</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-light bg-custom">
+	
+				<a id="b-color" class="navbar-brand" href="/">Home</a>
+				<a id="b-color" class="navbar-brand margin-link" href="/">Margin</a>
+				<a id="b-color" class="navbar-brand" href="/about">About</a>
+	
+				
+		</nav>
+		<!-- MATCH DATA IS CURENTTLY FROM -->
+
+		<div class="container">
+			<div class="row" id="header">
+				<div class="col-md">
+					<h1><%=players[0].name%></h1>
+				</div>
+				<div class="col-md" id="versus"><h1>Vs.</h1></div>
+				<div class="col-md">
+					<h1><%=players[1].name%></h1>
+				</div>
+
+				<div
+					class="row" 
+					id="container2"
+					style="width: 100%; height: 400px;"
+				></div>
+			</div>
+			<div class="row" id="h2h">
+				<table class="table">
+					<thead class="thead-custom">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Date</th>
+							<th scope="col">Winner</th>
+							<th scope="col">Loser</th>
+							<th scope="col">Score</th>
+						</tr>
+					</thead>
+					<%var count =1%> <%h2h.forEach(element => {%>
+					<tr>
+						<th scope="row"><%=count%></th>
+						<td><%=element.date%></td>
+						<td><%=element.winner_name%></td>
+						<td><%=element.loser_name%></td>
+						<td><%=element.score%></td>
+					</tr>
+					<%count++%> <%});%>
+				</table>
+			</div>
+			<div class="row" id="sets">
+				<div class="col-lg">
+					<h2 id="win-loss-header">Wins and Losses</h2>
+
+					<table id="trellis">
+						<tr>
+							<td class="first"></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="row" id="last10">
+				<%lTenmatches.forEach(e =>{%>
+				<div class="col-sm-6">
+					<table class="table-responsive">
+						<thead class="thead-custom">
+							<tr>
+								
+								<th scope="col">Date</th>
+								<th scope="col">Winner</th>
+								<th scope="col">Winner Rank</th>
+								<th scope="col">Loser</th>
+								<th scope="col">Loser Rank</th>
+								<th scope="col">Score</th>
+							</tr>
+						</thead>
+						<%var count =1%> <%e.data.forEach(element => {%>
+						<tr>
+							
+							<td><%=element.date%></td>
+							<td><%=element.winner_name%></td>
+							<td><%=element.winner_rank%></td>
+							<td><%=element.loser_name%></td>
+							<td><%=element.loser_rank%></td>
+							<td><%=element.score%></td>
+						</tr>
+						<%count++%> <%});%>
+					</table>
+				</div>
+				<%})%>
+			</div>
+		</div>
+	</body>
+	<script>
+
+				document.addEventListener("DOMContentLoaded", function () {
+					var player1 = <%-JSON.stringify(players[0])%>;
+					var player2 = <%-JSON.stringify(players[1])%>;
+					var lTen = <%-JSON.stringify(lTenmatches)%>;
+
+					console.log(lTen);
+					// console.log(player2);
+					// console.log(h2h);
+					var myChart = Highcharts.chart("container2", {
+        chart: {
+            type: "bar",
+        },
+        title: {
+            text: "Winning Percentage by Surface (Data from 2018-2019)",
+        },
+        xAxis: {
+            categories: ['Clay', 'Grass', 'Hard'],
+        },
+        yAxis: {
+            title: {
+                text: "Winning Percentage",
+            },
+        },
+        series: [
+            {name:player1.name,
+            data: player1.data},
+            {name:player2.name,
+            data: player2.data}
+
+        ],
+    });
+
+					
+				});
+// render set data for charts -- all stats are as a percentage of total games
+				var p1Set = <%-JSON.stringify(set_data[0])%>;
+				var p2Set = <%-JSON.stringify(set_data[1])%>;
+				var charts = [],
+		    containers = document.querySelectorAll('#trellis td'),
+		    datasets =
+			[{
+				name: p1Set.player,
+		            data: [(p1Set.winTotal/p1Set.totalGames)*100, p1Set.straightsetWins/p1Set.totalGames*100, p1Set.lossTotal/p1Set.totalGames*100, p1Set.straightsetLosses/p1Set.totalGames*100]
+		        },
+		        {
+					name: p2Set.player,
+		            data: [p2Set.winTotal/p2Set.totalGames*100, p2Set.straightsetWins/p2Set.totalGames*100, p2Set.lossTotal/p2Set.totalGames*100, p2Set.straightsetLosses/p2Set.totalGames*100]
+		        },
+
+		    ];
+
+		datasets.forEach(function(dataset, i) {
+		    charts.push(Highcharts.chart(containers[i], {
+
+		        chart: {
+		            type: 'bar',
+		            marginLeft: i === 0 ? 100 : 10
+		        },
+
+		        title: {
+		            text: dataset.name,
+		            align: 'left',
+		            x: i === 0 ? 90 : 0
+		        },
+
+		        credits: {
+		            enabled: false
+		        },
+
+		        xAxis: {
+		            categories: ['Win %', 'Staright Set Wins %', 'Loss %', 'Straight Set Losing %'],
+		            labels: {
+		                enabled: i === 0
+		            }
+		        },
+
+		        yAxis: {
+		            allowDecimals: false,
+		            title: {
+		                text: null
+		            },
+		            min: 0,
+		            max: 100
+		        },
+
+
+		        legend: {
+		            enabled: false
+		        },
+
+		        series: [dataset]
+
+		    }));
+		});
+
+	</script>
+		<script src="/scripts/path.js"></script>
+</html>

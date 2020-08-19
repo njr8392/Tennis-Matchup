@@ -1,0 +1,42 @@
+#versus{
+    text-align: center;
+}
+.bg-custom{
+    background-color: #191c7a;
+}
+
+#b-color{
+    color: floralwhite;
+}
+
+.container{
+    margin-top: 2em;
+}
+#h2h{
+    margin-top: 4em;
+}
+.thead-custom{
+    background-color: #191c7a;
+    color: floralwhite
+}
+#win-loss-header{
+    text-align: center;
+}
+#sets{
+    margin-top: 2em;
+}
+#trellis td {
+    width: 400px;
+    height: 300px;
+}
+#trellis td.first {
+    width: 475px;
+}
+
+body{
+    font-family: 'Quattrocento', serif;
+}
+p{
+    padding: 0 5em;
+}
+
