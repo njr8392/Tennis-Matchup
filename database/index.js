@@ -3,7 +3,7 @@ const db = new Client({
 	user: process.env.PGUSER,
 	host: process.env.HOST,
 	database: process.env.PGDATABASE, 
-	password:  proces.env.PGPASSWORD,
+	password:  process.env.PGPASSWORD,
 	port: process.env.PGPORT,
 });
 client.connect(function (err, res) {
