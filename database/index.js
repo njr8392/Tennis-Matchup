@@ -1,11 +1,10 @@
 const { Client } = require("pg");
-const config = require("../config.json");
-const {db} = new Client({
-	user: db.user,
-	host: db.host,
-	database: db.database, 
-	password:  db.password,
-	port: db.port,
+const db = new Client({
+	user: process.env.PGUSER,
+	host: process.env.HOST,
+	database: proces.env.PGDATABASE, 
+	password:  proces.env.PGPASSWORD,
+	port: PGPORT,
 });
 client.connect(function (err, res) {
 	if (err) {
