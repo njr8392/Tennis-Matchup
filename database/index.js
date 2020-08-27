@@ -1,10 +1,15 @@
 const { Client } = require("pg");
 const client = new Client({
-	user: process.env.PGUSER,
-	host: process.env.HOST,
-	database: process.env.PGDATABASE, 
-	password:  process.env.PGPASSWORD,
-	port: process.env.PGPORT,
+//	FOR LOCAL CONNECTION ONLY
+//	user: process.env.PGUSER,
+//	host: process.env.HOST,
+//	database: process.env.PGDATABASE, 
+//	password:  process.env.PGPASSWORD,
+//	 port: process.env.PGPORT,
+	connectionString: process.env.DATABASE_URL,
+	ssl: {
+	 rejectUnauthorized: false
+	}
 });
 client.connect(function (err, res) {
 	if (err) {
