@@ -2,9 +2,9 @@ const { Client } = require("pg");
 const db = new Client({
 	user: process.env.PGUSER,
 	host: process.env.HOST,
-	database: proces.env.PGDATABASE, 
+	database: process.env.PGDATABASE, 
 	password:  proces.env.PGPASSWORD,
-	port: PGPORT,
+	port: process.env.PGPORT,
 });
 client.connect(function (err, res) {
 	if (err) {
