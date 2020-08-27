@@ -1,0 +1,29 @@
+{
+  "name": "tennis-matchup",
+  "version": "1.0.0",
+  "description": "Profile of Tennis Players",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.2",
+    "express-promise-router": "^3.0.3",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.7",
+    "mongoose": "^5.9.13",
+    "pg": "^8.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/njr8392/Tennis-Matchup.git"
+  },
+  "author": "Nicholas Rodgers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/njr8392/Tennis-Matchup/issues"
+  },
+  "homepage": "https://github.com/njr8392/Tennis-Matchup#readme"
+}
