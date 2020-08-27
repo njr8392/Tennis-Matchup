@@ -1,7 +1,6 @@
-const  express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
+const  express = require("express"); const app = express(); const bodyParser = require("body-parser");
 const routes = require("./routes/index");
+cost port = process.env.PORT
 
 
 app.use(bodyParser.json())
@@ -12,6 +11,6 @@ app.use(express.static('public'));
 app.use('/', routes);
 
 
-app.listen(3000, function(){
+app.listen(port, function(){
     console.log("server is up!");
 });
