@@ -1,6 +1,6 @@
 const  express = require("express"); const app = express(); const bodyParser = require("body-parser");
 const routes = require("./routes/index");
-cost port = process.env.PORT
+const port = process.env.PORT
 
 
 app.use(bodyParser.json())
